@@ -1,0 +1,27 @@
+*{
+    margin:0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+main{
+    text-align: center;
+}
+div.warpper{
+    display: inline-block;
+}
+kbd{
+    border:1px solid salmon;
+    width:2em;
+    height:2em;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+main > div.warpper > div:nth-child(2) {
+    margin-left: 1em;
+}
+main > div.warpper > div:nth-child(3) {
+    margin-left: 1em;
+}
