@@ -36,17 +36,32 @@
       's ': 'sohu.com',
       'z' : 'zhihu.com',
     }
+    var hashInlocalStorage = JSON.parse(localStorage.getItem('cundang' || 'null'));
+    if(hashInlocalStorage){
+      hash = hashInlocalStorage;
+    }
+
 
     index = 0;
     while(index < keys['length']){// 0 1 2
         div1 = document.createElement('div');
         main.appendChild(div1);
-        row = keys[index];  //第一个数组 第二个数组 第三个数组
+        row = keys[index];  //第一个数组 第二个数组 第三个数组        
         index2 = 0;
         while(index2 <row['length']){
           kbd1 = document.createElement('kbd');
           kbd1.textContent=row[index2];
+          button1 = document.createElement('button');
+          kbd1.appendChild(button1);
+          button1.textContent = '编辑';
           div1.appendChild(kbd1);
+          button1.id = row[index2];
+          button1.onclick = function(sdasfaf){
+            key = sdasfaf['target']['id'];
+            x = prompt('请输入新的网址');
+            hash[key] = x;
+            localStorage.setItem('cundang', JSON.stringify(hash));
+          }
           index2 = index2 + 1 ;
         }
         index = index + 1;
