@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./css/style.css">
   <title>我的导航</title>
   <head></head>
+  <body>
   <main >
     <div class="warpper" id='main'>
 
@@ -45,12 +46,14 @@
     index = 0;
     while(index < keys['length']){// 0 1 2
         div1 = document.createElement('div');
+        div1.className = 'row';
         main.appendChild(div1);
         row = keys[index];  //第一个数组 第二个数组 第三个数组        
         index2 = 0;
         while(index2 <row['length']){
           kbd1 = document.createElement('kbd');
           kbd1.textContent=row[index2];
+          kbd1.className = 'key';
           button1 = document.createElement('button');
           kbd1.appendChild(button1);
           button1.textContent = '编辑';
@@ -72,8 +75,6 @@
       window.open('http://'+website, '_blank')
     }
   </script>
-</head>
-<body>
   
 </body>
 </html>
