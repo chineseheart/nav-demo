@@ -15,6 +15,7 @@
   </main>
   <footer></footer>
   <script>
+    //0. 初始化数据
     var keys = {
       0:['q','w','e','r','t','y','u','i','o','p'],
       1:['a','s','d','f','g','h','j','k','l'],
@@ -35,43 +36,82 @@
       'a' : "acfun.tv",
       's ': 'sohu.com',
       'z' : 'zhihu.com',
+      'v' : 'v2ex.com'
     }
-    var hashInlocalStorage = JSON.parse(localStorage.getItem('cundang' || 'null'));
+    //1. 取出 hashInlocalStorage 中的 cundang 对应的 hash
+    var hashInlocalStorage = getFromInlocalStorage('cundang');
     if(hashInlocalStorage){
       hash = hashInlocalStorage;
     }
 
+    // 1. 生成键盘
 
-    index = 0;
-    while(index < keys['length']){// 0 1 2
-        div1 = document.createElement('div');
+    function tag(tagname, attributes){
+      return document.createElement(tagname);
+    }
+    for(var index = 0;index < keys['length'];index = index + 1){// 0 1 2
+
+        var div1 = tag('div');
         div1.className = 'row';
-        main.appendChild(div1);
-        row = keys[index];  //第一个数组 第二个数组 第三个数组        
-        index2 = 0;
-        while(index2 <row['length']){
-          kbd1 = document.createElement('kbd');
-          kbd1.textContent=row[index2];
-          kbd1.className = 'key';
-          button1 = document.createElement('button');
-          kbd1.appendChild(button1);
+
+        var row = keys[index];  //第一个数组 第二个数组 第三个数组        
+        
+        for(var index2 = 0; index2<row['length']; index2 = index2 + 1 ){
+
+          var span1 = tag('span');
+          span1.textContent=row[index2];
+          span1.className= 'text';
+
+          var img1 = tag('img');
+
+          var button1 = tag('button');
           button1.textContent = '编辑';
-          div1.appendChild(kbd1);
           button1.id = row[index2];
+          
+
+          if(hash[row[index2]]){
+            img1.src = 'http://'+hash[row[index2]]+'/favicon.ico';          
+          }else{
+            img1.src = 'https://user-gold-cdn.xitu.io/2019/4/11/16a0b6d56c969826?w=8&h=8&f=jpeg&s=695';
+          }
+          img1.onerror = function(sdfa){
+            sdfa.target.src = 'https://user-gold-cdn.xitu.io/2019/4/11/16a0b6d56c969826?w=8&h=8&f=jpeg&s=695';
+            }
+          
           button1.onclick = function(sdasfaf){
-            key = sdasfaf['target']['id'];
-            x = prompt('请输入新的网址');
+            var button2 = sdasfaf['target'];//就是用户点击的元素 
+            var img2 = button2.previousSibling;
+            var key = button2['id'];
+            var x = prompt('请输入新的网址');
             hash[key] = x;
+            img2.src = 'http://'+x+'/favicon.ico';
+
+            img2.onerror = function(sdfa){
+            sdfa.target.src = 'https://user-gold-cdn.xitu.io/2019/4/11/16a0b6d56c969826?w=8&h=8&f=jpeg&s=695';
+            }
+
             localStorage.setItem('cundang', JSON.stringify(hash));
           }
-          index2 = index2 + 1 ;
+
+          var kbd1 = tag('kbd');
+          kbd1.className = 'key';
+          
+          div1.appendChild(kbd1);
+          kbd1.appendChild(span1);
+          kbd1.appendChild(img1);
+          kbd1.appendChild(button1);
         }
-        index = index + 1;
+        main.appendChild(div1);
     }
+    // 2. 监听键盘
     document.onkeypress = function(shasdfasd){
       key = shasdfasd['key'];
       website = hash[key];
       window.open('http://'+website, '_blank')
+    }
+
+    function getFromInlocalStorage(name){
+      return JSON.parse(localStorage.getItem(name) || 'null');
     }
   </script>
   
