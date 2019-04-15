@@ -21,41 +21,34 @@
     var keys = hashA['keys'];
     var hash = hashA['hash'];
     // 1. 生成键盘
-    generateKeyboard(keys, hash);
-    function generateKeyboard(keys, hash){
-          for(var index = 0;index < keys['length'];index = index + 1){// 0 1 2
+    for(var index = 0;index < keys['length'];index = index + 1){// 0 1 2
 
-          var div1 = tag('div');
-          div1.className = 'row';
+    var div1 = tag('div');
+    div1.className = 'row';
 
-          var row = keys[index];  //第一个数组 第二个数组 第三个数组        
+    var row = keys[index];  //第一个数组 第二个数组 第三个数组        
 
-          for(var index2 = 0; index2<row['length']; index2 = index2 + 1 ){
+    for(var index2 = 0; index2<row['length']; index2 = index2 + 1 ){
 
-          var span1 = createSpan(row[index2]);
+    var span1 = createSpan(row[index2]);
 
-          var img1 = createImg(hash[row[index2]]);
+    var img1 = createImg(hash[row[index2]]);
 
-          var button1 = createButton(row[index2]);
+    var button1 = createButton(row[index2]);
 
-          var kbd1 = tag('kbd');
-          kbd1.className = 'key';
+    var kbd1 = tag('kbd');
+    kbd1.className = 'key';
 
-          div1.appendChild(kbd1);
-          kbd1.appendChild(span1);
-          kbd1.appendChild(img1);
-          kbd1.appendChild(button1);
-          }
-          main.appendChild(div1);
-          }
+    div1.appendChild(kbd1);
+    kbd1.appendChild(span1);
+    kbd1.appendChild(img1);
+    kbd1.appendChild(button1);
+    }
+    main.appendChild(div1);
     }
     
     // 2. 监听键盘
-    document.onkeypress = function(shasdfasd){
-      key = shasdfasd['key'];
-      website = hash[key];
-      window.open('http://'+website, '_blank')
-    }
+    listenToUser(hash);
 
     function getFromInlocalStorage(name){
       return JSON.parse(localStorage.getItem(name) || 'null');
@@ -136,6 +129,13 @@
       'hash':hash
     }
     }
+    function listenToUser(hash){
+    document.onkeypress = function(shasdfasd){
+      key = shasdfasd['key'];
+      website = hash[key];
+      window.open('http://'+website, '_blank')
+    }
+  }
   </script>
   
 </body>
