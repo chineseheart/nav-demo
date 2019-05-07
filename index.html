@@ -8,7 +8,10 @@
   <title>我的导航</title>
   <head></head>
   <body>
-  <main >
+      <div id="siteWelcome" class="site-welcome active">
+          <div class="loading"></div>
+      </div>
+  <main>
     <div class="warpper" id='main'>
 
     </div>
@@ -46,6 +49,9 @@
     }
     main.appendChild(div1);
     }
+
+    siteWelcome.classList.remove('active')
+
     
     // 2. 监听键盘
     listenToUser(hash);
